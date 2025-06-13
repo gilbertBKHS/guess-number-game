@@ -10,10 +10,11 @@
 
   <div class="container">
     <h1>🎯 Guess the Number!</h1>
-    <p>I'm thinking of a number between 1 and 50. You have 6 tries!</p>
+    <p>I'm thinking of a number between 1 and 50. You have 8 tries!</p>
 
     <input type="number" id="guess" min="1" max="50" placeholder="Enter your guess">
     <button onclick="checkGuess()">Guess</button>
+    <button id="restartBtn" onclick="restartGame()">Restart</button>
 
     <p id="demo"></p>
     <img id="result-gif" src="" alt="">
@@ -25,15 +26,15 @@
 
   <script>
     let random_number = Math.floor(Math.random() * 50) + 1;
-    let tries = 6;
+    let tries = 8;
 
     function checkGuess() {
-      let guessInput = document.getElementById("guess");
-      let guess = Number(guessInput.value);
-      let demo = document.getElementById("demo");
-      let gif = document.getElementById("result-gif");
+      const guessInput = document.getElementById("guess");
+      const guess = Number(guessInput.value);
+      const demo = document.getElementById("demo");
+      const gif = document.getElementById("result-gif");
 
-      guessInput.value = ""; // Clear input after each guess
+      guessInput.value = "";
 
       if (guess < 1 || guess > 50) {
         alert("Guess must be between 1 and 50!");
@@ -54,6 +55,16 @@
           demo.innerHTML = `❌ Wrong! You have ${tries} ${tries === 1 ? 'try' : 'tries'} left. ${guess > random_number ? 'Too high!' : 'Too low!'}`;
         }
       }
+    }
+
+    function restartGame() {
+      random_number = Math.floor(Math.random() * 50) + 1;
+      tries = 6;
+      document.getElementById("guess").value = "";
+      document.getElementById("demo").innerHTML = "";
+      const gif = document.getElementById("result-gif");
+      gif.src = "";
+      gif.style.display = "none";
     }
   </script>
 
